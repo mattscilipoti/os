@@ -1,9 +1,12 @@
 require 'rubygems' if RUBY_VERSION < '1.9.0'
 
 require File.dirname(__FILE__) + '/../lib/os.rb' # load before sane to avoid sane being able to requir the gemified version...
-require 'sane'
-load File.dirname(__FILE__) + '/../lib/os.rb' # just in case
 require 'rspec' # rspec2
+
+RSpec.configure do |config|
+  # config.run_all_when_everything_filtered = true
+  config.expect_with :stdlib         # => Test::Unit or MiniTest
+end
 
 describe "OS" do
 
@@ -46,7 +49,7 @@ describe "OS" do
     end
 
   end
-  
+
   it "should have an iron_ruby method" do
     if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'ironruby'
       assert OS.iron_ruby? == true
@@ -80,7 +83,7 @@ describe "OS" do
     end
 
   end
-  
+
   it "should have a cygwin? method" do
     if RUBY_PLATFORM =~ /cygwin/
       assert OS.cygwin? == true
@@ -102,7 +105,7 @@ describe "OS" do
     assert bytes > 0 # should always be true
     assert bytes.is_a?(Numeric) # don't want strings from any platform...
   end
-  
+
   it "should tell you what the right /dev/null is" do
     if OS.windows?
       OS.dev_null.should == "NUL"
@@ -110,9 +113,9 @@ describe "OS" do
       OS.dev_null.should == "/dev/null"
     end
   end
-  
+
   it "should have a jruby method" do
-    if RUBY_DESCRIPTION =~ /^(jruby|java)/
+    if defined?(RUBY_DESCRIPTION) && RUBY_DESCRIPTION =~ /^(jruby|java)/
       assert OS.jruby?
     else
       assert !OS.jruby?
