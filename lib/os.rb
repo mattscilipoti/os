@@ -42,6 +42,15 @@ class OS
 
   end
 
+  # true for linux, false for windows, os x, cygwin
+  def self.linux?
+    if (RbConfig::CONFIG['host_os'] =~ /linux/)
+      true
+    else
+      false
+    end
+  end
+
   def self.iron_ruby?
    @iron_ruby ||= begin
      if defined?(RUBY_ENGINE) && (RUBY_ENGINE == 'ironruby')
@@ -148,6 +157,10 @@ class OS
 
     def self.windows?
       ENV['OS'] == 'Windows_NT'
+    end
+
+    def self.linux?
+      RbConfig::CONFIG['host_os'] =~ /linux/ ? true : false
     end
 
   end

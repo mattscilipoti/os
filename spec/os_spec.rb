@@ -1,12 +1,4 @@
-require 'rubygems' if RUBY_VERSION < '1.9.0'
-
-require File.dirname(__FILE__) + '/../lib/os.rb' # load before sane to avoid sane being able to requir the gemified version...
-require 'rspec' # rspec2
-
-RSpec.configure do |config|
-  # config.run_all_when_everything_filtered = true
-  config.expect_with :stdlib         # => Test::Unit or MiniTest
-end
+require File.expand_path('spec_helper.rb', File.dirname(__FILE__))
 
 describe "OS" do
 
