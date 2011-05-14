@@ -1,5 +1,6 @@
 = FORK Readme
 This is a fork of rdp/os.  I recommend you use that repo.  Most of the changes you see here will be merged into there shortly.
+{Travis Status}[http://travis-ci.org/mattscilipoti/os] http://travis-ci.org/mattscilipoti/os.png
 ----
 
 The OS gem allows for some easy telling if you're on windows or not.
